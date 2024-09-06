@@ -1,0 +1,1 @@
+# frontend-scan-vulnerabilidade-wp
