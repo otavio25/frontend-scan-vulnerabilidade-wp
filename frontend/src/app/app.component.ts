@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './_components/navbar/navbar.component';
@@ -11,7 +12,17 @@ import { RelatorioComponent } from './pages/relatorio/relatorio.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, NavbarComponent, FooterComponent, InfoPluginsComponent, InforTemaComponent, InforVersaoWpComponent, RelatorioComponent],
+  imports: [
+    RouterOutlet, 
+    HttpClientModule,
+    HomeComponent, 
+    NavbarComponent, 
+    FooterComponent, 
+    InfoPluginsComponent, 
+    InforTemaComponent, 
+    InforVersaoWpComponent, 
+    RelatorioComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

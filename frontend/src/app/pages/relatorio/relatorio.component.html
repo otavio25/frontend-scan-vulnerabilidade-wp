@@ -1,11 +1,85 @@
 <div class="container relatorio">
     <h1 class="text-center"> Relatório completo </h1>
-    <form>
+    <form (ngSubmit)="sendPostRequest()" #form="ngForm">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">URL</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="url" name="url" required>
             <div id="emailHelp" class="form-text">Infome uma URL de um site Wordpress válido</div>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Enviar</button>
     </form>
+</div>
+
+<div class="container" *ngIf="responseData">
+    <h2 class="mt-4">Resultado:</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Version Number (Main)</td>
+                <td>{{ responseData.version.version.number }}</td>
+            </tr>
+            <tr>
+                <td>Status (Main)</td>
+                <td>{{ responseData.version.version.status }}</td>
+            </tr>
+            <tr>
+                <td>Style Name (Main Theme)</td>
+                <td>{{ responseData.main_theme.style_name }}</td>
+            </tr>
+            <tr>
+                <td>Slug (Main Theme)</td>
+                <td>{{ responseData.main_theme.slug }}</td>
+            </tr>
+            <tr>
+                <td>Latest Version (Main Theme)</td>
+                <td>{{ responseData.main_theme.latest_version }}</td>
+            </tr>
+            <tr>
+                <td>Outdated (Main Theme)</td>
+                <td>{{ responseData.main_theme.outdated }}</td>
+            </tr>
+            <tr>
+                <td>Version Number (Main Theme)</td>
+                <td>{{ responseData.main_theme.version?.number }}</td>
+            </tr>
+            <tr>
+                <td>Name (Plugin)</td>
+                <td>{{ responseData.plugins['svg-support'].name }}</td>
+            </tr>
+            <tr>
+                <td>Slug (Plugin)</td>
+                <td>{{ responseData.plugins['svg-support'].slug }}</td>
+            </tr>
+            <tr>
+                <td>Last Updated (Plugin)</td>
+                <td>{{ responseData.plugins['svg-support'].last_updated }}</td>
+            </tr>
+            <tr>
+                <td>Version Number (Plugin)</td>
+                <td>{{ responseData.plugins['svg-support'].version?.number }}</td>
+            </tr>
+            <tr>
+                <td>Added (Plugin)</td>
+                <td>{{ responseData.plugins['svg-support'].added }}</td>
+            </tr>
+            <tr>
+                <td>Outdated (Plugin)</td>
+                <td>{{ responseData.plugins['svg-support'].outdated }}</td>
+            </tr>
+            <tr>
+                <td>Latest Version (Plugin)</td>
+                <td>{{ responseData.plugins['svg-support'].latest_version }}</td>
+            </tr>
+            <tr>
+                <td>Vulnerabilities (Plugin)</td>
+                <td>{{ responseData.plugins['svg-support'].vulnerabilities?.length > 0 ? responseData.plugins['svg-support'].vulnerabilities.join(', ') : 'Nenhuma' }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -1,11 +1,57 @@
 <div class="container info-plugins">
     <h1 class="text-center"> infomações sobre plugins </h1>
-    <form>
+    <form (ngSubmit)="sendPostRequest()" #form="ngForm">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">URL</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="url" name="url" required>
             <div id="emailHelp" class="form-text">Infome uma URL de um site Wordpress válido</div>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Enviar</button>
     </form>
+</div>
+
+<div class="container" *ngIf="responseData">
+    <h2 class="mt-4">Resultado:</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>{{ responseData.plugins['svg-support'].name }}</td>
+            </tr>
+            <tr>
+                <td>Slug</td>
+                <td>{{ responseData.plugins['svg-support'].slug }}</td>
+            </tr>
+            <tr>
+                <td>Last Updated</td>
+                <td>{{ responseData.plugins['svg-support'].last_updated }}</td>
+            </tr>
+            <tr>
+                <td>Version Number</td>
+                <td>{{ responseData.plugins['svg-support'].version?.number }}</td>
+            </tr>
+            <tr>
+                <td>Added</td>
+                <td>{{ responseData.plugins['svg-support'].added }}</td>
+            </tr>
+            <tr>
+                <td>Outdated</td>
+                <td>{{ responseData.plugins['svg-support'].outdated }}</td>
+            </tr>
+            <tr>
+                <td>Latest Version</td>
+                <td>{{ responseData.plugins['svg-support'].latest_version }}</td>
+            </tr>
+            <tr>
+                <td>Vulnerabilities</td>
+                <td>{{ responseData.plugins['svg-support'].vulnerabilities?.length > 0 ? responseData.plugins['svg-support'].vulnerabilities.join(', ') : 'Nenhuma' }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
