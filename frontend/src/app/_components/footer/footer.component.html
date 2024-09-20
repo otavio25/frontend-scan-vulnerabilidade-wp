@@ -1,12 +1,28 @@
-<div class="container footer-container">
+<!-- Footer A, que aparece apenas no path '/' -->
+<div *ngIf="showFooterA" class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">© 2024 - Todos os Direitos Reservados</p>
-    
-        <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <img src="assets/img/logo.png" alt="" width="50" height="50">
-        </a>
-    
-        <ul class="nav col-md-4 justify-content-end">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                <img src="assets/img/logo.png" alt="" width="50" height="50">
+            </a>
+            <span class="text-muted">© 2024 - Todos os Direitos Reservados</span>
+        </div>
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="nav-item"><a href='https://wa.me/5561996338703' target="_blank" rel="noopener noreferrer" class="nav-link px-2 text-muted mdi--whatsapp"></a></li>
+        </ul>
+    </footer>
+</div>
+
+<!-- Footer B, que aparece em outros paths -->
+<div *ngIf="!showFooterA" class="container footer-container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                <img src="assets/img/logo.png" alt="" width="50" height="50">
+            </a>
+            <span class="text-muted">© 2024 - Todos os Direitos Reservados</span>
+        </div>
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
             <li class="nav-item"><a href='https://wa.me/5561996338703' target="_blank" rel="noopener noreferrer" class="nav-link px-2 text-muted mdi--whatsapp"></a></li>
         </ul>
     </footer>
