@@ -14,9 +14,11 @@ import { FormsModule } from '@angular/forms';
 export class InforTemaComponent {
   url: string = '';
   responseData: any;
+  isLoading: boolean = false;
   constructor(private http: HttpClient) {}
 
   async sendPostRequest() {
+    this.isLoading = true;
     const apiUrl = 'http://localhost:3333/infotema';
     const body = { url: this.url };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -26,6 +28,8 @@ export class InforTemaComponent {
       console.log('Response:', this.responseData);
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      this.isLoading = false; // Desativar o estado de carregamento
     }
   }
 }

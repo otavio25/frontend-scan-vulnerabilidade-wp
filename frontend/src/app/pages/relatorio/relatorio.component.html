@@ -6,12 +6,15 @@
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="url" name="url" required>
             <div id="emailHelp" class="form-text">Infome uma URL de um site Wordpress válido</div>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Enviar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isLoading">
+            {{ isLoading ? 'Enviando...' : 'Enviar' }}
+        </button>
     </form>
 </div>
 
 <div class="container" *ngIf="responseData">
-    <h2 class="mt-4">Resultado:</h2>
+    <!-- Tabela sobre a versão principal -->
+    <h2 class="mt-4">Informações da Versão Principal</h2>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -28,6 +31,19 @@
                 <td>Status (Main)</td>
                 <td>{{ responseData.version.version.status }}</td>
             </tr>
+        </tbody>
+    </table>
+
+    <!-- Tabela sobre o tema principal -->
+    <h2 class="mt-4">Informações do Tema Principal</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
             <tr>
                 <td>Style Name (Main Theme)</td>
                 <td>{{ responseData.main_theme.style_name }}</td>
@@ -48,38 +64,50 @@
                 <td>Version Number (Main Theme)</td>
                 <td>{{ responseData.main_theme.version?.number }}</td>
             </tr>
-            <tr>
-                <td>Name (Plugin)</td>
-                <td>{{ responseData.plugins['svg-support'].name }}</td>
-            </tr>
-            <tr>
-                <td>Slug (Plugin)</td>
-                <td>{{ responseData.plugins['svg-support'].slug }}</td>
-            </tr>
-            <tr>
-                <td>Last Updated (Plugin)</td>
-                <td>{{ responseData.plugins['svg-support'].last_updated }}</td>
-            </tr>
-            <tr>
-                <td>Version Number (Plugin)</td>
-                <td>{{ responseData.plugins['svg-support'].version?.number }}</td>
-            </tr>
-            <tr>
-                <td>Added (Plugin)</td>
-                <td>{{ responseData.plugins['svg-support'].added }}</td>
-            </tr>
-            <tr>
-                <td>Outdated (Plugin)</td>
-                <td>{{ responseData.plugins['svg-support'].outdated }}</td>
-            </tr>
-            <tr>
-                <td>Latest Version (Plugin)</td>
-                <td>{{ responseData.plugins['svg-support'].latest_version }}</td>
-            </tr>
-            <tr>
-                <td>Vulnerabilities (Plugin)</td>
-                <td>{{ responseData.plugins['svg-support'].vulnerabilities?.length > 0 ? responseData.plugins['svg-support'].vulnerabilities.join(', ') : 'Nenhuma' }}</td>
-            </tr>
         </tbody>
     </table>
+
+    <!-- Tabela sobre os plugins -->
+    <h2 class="mt-4">Informações dos Plugins</h2>
+    <ng-container *ngFor="let pluginKey of getPluginKeys(responseData.plugins)">
+        <h3>{{ responseData.plugins[pluginKey].name }} ({{ pluginKey }})</h3>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Slug</td>
+                <td>{{ responseData.plugins[pluginKey].slug }}</td>
+            </tr>
+            <tr>
+                <td>Last Updated</td>
+                <td>{{ responseData.plugins[pluginKey].last_updated }}</td>
+            </tr>
+            <tr>
+                <td>Version Number</td>
+                <td>{{ responseData.plugins[pluginKey].version?.number }}</td>
+            </tr>
+            <tr>
+                <td>Added</td>
+                <td>{{ responseData.plugins[pluginKey].added }}</td>
+            </tr>
+            <tr>
+                <td>Outdated</td>
+                <td>{{ responseData.plugins[pluginKey].outdated }}</td>
+            </tr>
+            <tr>
+                <td>Latest Version</td>
+                <td>{{ responseData.plugins[pluginKey].latest_version }}</td>
+            </tr>
+            <tr>
+                <td>Vulnerabilities</td>
+                <td>{{ responseData.plugins[pluginKey].vulnerabilities?.length > 0 ? responseData.plugins[pluginKey].vulnerabilities.join(', ') : 'Nenhuma' }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </ng-container>
 </div>

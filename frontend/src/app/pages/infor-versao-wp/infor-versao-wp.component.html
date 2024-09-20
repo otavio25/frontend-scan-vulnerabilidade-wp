@@ -6,7 +6,9 @@
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="url" name="url" required>
             <div id="emailHelp" class="form-text">Infome uma URL de um site Wordpress válido</div>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Enviar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isLoading">
+            {{ isLoading ? 'Enviando...' : 'Enviar' }}
+        </button>
     </form>
 </div>
 
