@@ -9,7 +9,7 @@ Este sistema tem o objetivo de retornar dados do banco de dados CVE (Common Vuln
 - **Package Manager**: npm 10.2.3
 
 ### Comandos
-Acesse a pasta **/frontend** e execute:
+execute os seguintes comandos:
 
 ```bash
 npm install
